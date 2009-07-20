@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block conteudo %}
+    <img src="{{ MEDIA_URL }}foto.jpg"/>
+    {% for artigo in latest %}
+        <div class="artigo">
+            <a href="
+                {% url blog.views.artigo artigo_id=artigo.id %}">
+                <h2>{{ artigo.titulo }}</h2>
+            </a>
+            <div class="conteudo">
+                Publicado há {{ artigo.publicacao|timesince }}<br/>
+                {{ artigo.conteudo }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+
+<!---------------------------------------------------------------------------------------------
+<html>
+    <head>
+        <link rel="alternate" type="application/rss+xml" title="Ultimos
+        artigos do Alatazan" href="/rss/ultimos/" />
+    </head>
+<body>
+
+<h1>Meu blog</h1>
+
+{% for Artigo in latest %}
+   <h2>{{ Artigo.titulo }}</h2>
+   {{ Artigo.conteudo }}
+{% endfor %}
+
+</body>
+</html>
+----------------------------------------------------------------------------------------------->
+
+<!-- Desabilitado acima para uso de CSS -->
+<!-- Novo codigo no topo -----------------------------------------------------------------------
+<html>
+<head>
+
+    <!-- <title>Blog do Alatazan</title> -->
+
+    <link rel="alternate" type="application/rss+xml" title="Ultimos
+        artigos do Alatazan" href="/rss/ultimos/" />
+
+    <style type="text/css">
+        body {
+            font-family: arial;
+            background-color: green;
+            color: white;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        h2 {
+           margin: 0;
+           background-color: #eee;
+           padding: 5px;
+           font-size: 1.2em;
+       }
+       .artigo {
+           border: 1px solid black;
+           background-color: white;
+           color: black;
+       }
+       .conteudo {
+           padding: 10px;
+       }
+    </style>
+</head>
+
+<body>
+   <h1>-- Blog do Alatazan --</h1>
+   {% for artigo in latest %}
+      <div class="artigo">
+          <!-- <h2>{{ artigo.titulo }}</h2> OBS: Substituido pelo ref abaixo -->
+
+          <!-- OBS: Substituido pelo ref abaixo 
+          <a 
+              href="{{ artigo.get_absolute_url }}"> 
+              <h2>{{ artigo.titulo }}</h2>
+          </a>
+          -->
+
+          <a href="{% url blog.views.artigo artigo_id=artigo.id %}">
+              <h2>{{ artigo.titulo }}</h2>
+          </a>
+
+          <div class="conteudo">
+
+              <!-- Publicado em {{ artigo.publicacao }}<br/> -->
+
+              <!-- Acertado formatacao da data -->
+              <!-- Publicado em {{ artigo.publicacao|date:"d \d\e F \d\e Y" }}<br/> -->
+
+              <!-- Nova formataçao para data -->
+              Publicado há {{ artigo.publicacao|timesince }}<br/>
+
+              {{ artigo.conteudo }}
+
+          </div>
+      </div>
+   {% endfor %}
+   {% include "rodape.html" %}
+</body>
+</html>
+--------------------------------------------------------------------------------------->
+
