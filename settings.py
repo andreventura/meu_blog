@@ -102,6 +102,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.comments',
     'meu_blog.blog',
+    'meu_blog.galeria',
     )
 
 EMAIL_HOST = 'smtp.gmail.com'

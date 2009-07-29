@@ -26,11 +26,9 @@ class Artigo(models.Model):
     
 
 # SIGNALS
-
+'''
 from django.db.models import signals
 from django.template.defaultfilters import slugify
-#def artigo_pre_save(signal, instance, sender, **kwargs):
-#    instance.slug = slugify(instance.titulo)
 
 def artigo_pre_save(signal, instance, sender, **kwargs):
     """Este signal gera um slug automaticamente. Ele verifica se
@@ -47,3 +45,10 @@ def artigo_pre_save(signal, instance, sender, **kwargs):
 	instance.slug = novo_slug
 
 signals.pre_save.connect(artigo_pre_save, sender=Artigo)
+'''
+
+# SIGNALS
+from django.db.models import signals
+from utils.signals_comuns import slug_pre_save
+signals.pre_save.connect(slug_pre_save, sender=Artigo)
+
